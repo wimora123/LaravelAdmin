@@ -1,0 +1,28 @@
+1. Sebelum buat make:auth
+- composer require laravel/ui:^2.4
+- php artisan ui vue --auth
+
+2. Cara input admin langsung ke table user
+- php artisan tinker
+- Ketik:
+
+User::create(['name' => 'wimora', 'email' => 'wimorasarwindo@yahoo.com', 'password' => Bcrypt('12345')])
+
+3. Supaya verifikasi email jalan tanpa masalah, biasakan ketik di terminal:
+
+php artisan config:clear
+
+4a. Untuk ubah status, kita pergi ke App\Merchant dan di extends model, code 
+
+protected $fillable = ['status']; 
+
+Karena kalau tidak, bakal error
+
+4b. Lalu di merchantController/edit, code
+
+   if($barang->status === 1){
+            $barang->update(['status' => false]);
+        }
+        else{
+            $barang->update(['status' => true]);
+        }

@@ -1,0 +1,9 @@
+.sidebar-dark.navbarMenu .nav-item.active .nav-link{
+	background-color: black;
+	color:beige;
+	font-weight: 800;
+}
+
+.sidebar-dark.navbarMenu .nav-item .nav-link{
+	color:lightgreen;
+}
