@@ -42,7 +42,7 @@ class MerchantCategory extends Controller
 		$category ->name_category = $namaKategori;
 		$category ->update();
 
-		return redirect()->route('merchantCategory')->with('success', 'Kategori berhasil ditambah');
+		return redirect()->route('merchantCategory')->with('success', 'Kategori berhasil diedit');
 	}
 
 	public function destroy($id)
