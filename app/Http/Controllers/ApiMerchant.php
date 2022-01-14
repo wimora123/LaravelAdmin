@@ -29,10 +29,7 @@ class ApiMerchant extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -40,7 +37,7 @@ class ApiMerchant extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $barang = new Merchant;
 
@@ -112,11 +109,12 @@ class ApiMerchant extends Controller
         $barang->description = $description ? $description : $barang->description; 
         $barang->status = $status ? $status : $barang->status;
         
-        if($barang->status === 0){
-            $barang->update(['status' => true]);
-        }
-        else if($barang->status === 1){
+        // Nah kita buat status === 1 dulu, jangan status === 0 dulu nanti hasilnya saat edit ke false lagi, baliknya true terus
+        if($barang->status === 1){
             $barang->update(['status' => false]);
+        }
+        else if($barang->status === 0){
+            $barang->update(['status' => true]);
         }
         else if($barang->status > 1){
             return "Status not valid. Please input true as active and false as not active";
