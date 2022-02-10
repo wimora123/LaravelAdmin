@@ -18,9 +18,16 @@ class MerchantCategory extends Controller
 	}
 
 	public function create(Request $request){
-		$this->validate($request,[
+		$rules=[
 			'kategori' => 'required|min:3'
-		]);
+		];
+
+		$customRules=[
+			'required'=>'Kategori tidak boleh kosong',
+			'min'=>'Kategori tidak boleh kurang dari 3 huruf'
+		];
+
+		$this->validate($request, $rules, $customRules);
 
 		$category = new Categories;
 		$namaKategori = $request->kategori;
