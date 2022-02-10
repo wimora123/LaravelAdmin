@@ -44,13 +44,16 @@ class MerchantController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $rules=[
             'namaBarang' => 'required',
             'kategori' => 'required',
             'hargaBarang' => 'required',
             'qty' => 'required',
-            'description' => 'required'
-        ]);
+            'description' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ];
+
+        $this->validate($request, $rules);
 
         $barang = new Merchant;
 
@@ -61,15 +64,28 @@ class MerchantController extends Controller
         $description = $request->description;
         $status = $request->status;
 
-        $barang->name_merchant = $namaBarang; 
-        $barang->id_kategori = $kategori; 
-        $barang->price = $harga; 
-        $barang->quantity = $qty; 
-        $barang->description = $description; 
-        $barang->status = $status; 
+        // $image = $request->file;
+       
+        // $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('file')->getClientOriginalName());
+        $filename = $request->file('file')->getClientOriginalName();
+        $request->file('file')->move(public_path('/assets/images/'), $filename);
+    
+
+        
+            $barang->name_merchant = $namaBarang; 
+            $barang->id_kategori = $kategori; 
+            $barang->price = $harga; 
+            $barang->quantity = $qty; 
+            $barang->description = $description; 
+            $barang->status = $status; 
+            $barang->images = $filename;
+        
+
 
         $barang->save();
-        return redirect()->route('listMerchant')->with('success', 'Data berhasil ditambah');
+        return redirect()->route('listMerchant')->with([
+            'success' => 'Data berhasil ditambah'
+        ]);
     }
 
     /**
@@ -116,6 +132,18 @@ class MerchantController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rules=[
+            'namaBarang' => 'required',
+            'kategori' => 'required',
+            'hargaBarang' => 'required',
+            'qty' => 'required',
+            'description' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ];
+
+        $this->validate($request, $rules);
+
+
         $barang = Merchant::where('id', $id)->first();
 
         $namaBarang = $request->namaBarang;
@@ -125,12 +153,26 @@ class MerchantController extends Controller
         $description = $request->description;
         $status = $request->status === 1 ? true : false;
 
+        // $filename = round(microtime(true) * 1000).'-'.str_replace(' ','-',$request->file('file')->getClientOriginalName());
+        $file = $request->file('file');
+        $filename = $file->getClientOriginalName();
+        $file->move('uploads/images', $filename);
+
+        if (file_exists(public_path($filename =  $file->getClientOriginalName()))) 
+        {
+            unlink(public_path($filename));
+        };
+
+
         $barang->name_merchant = $namaBarang ? $namaBarang : $barang->name_merchant; 
         $barang->id_kategori = $kategori ? $kategori : $barang->id_kategori; 
         $barang->price = $harga ? $harga : $barang->price; 
         $barang->quantity = $qty ? $qty : $barang->quantity; 
         $barang->description = $description ? $description : $barang->description; 
         $barang->status = $status ? $status : $barang->status;
+        $barang->images = $filename ? $filename : $barang->images;
+
+
         
         if($barang->status === 1){
             $barang->update(['status' => false]);

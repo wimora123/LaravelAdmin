@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2022 at 08:33 AM
+-- Generation Time: Feb 10, 2022 at 09:55 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -82,7 +82,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name_category`, `created_at`, `updated_at`) VALUES
 (1, 'Makanan', '2022-01-09 21:16:34', '2022-01-09 21:16:34'),
-(2, 'Minuman', '2022-01-09 21:16:38', '2022-01-09 21:16:38'),
+(2, 'Pakaian', '2022-01-09 21:16:38', '2022-02-03 00:10:42'),
 (3, 'Alat tulis kantor', '2022-01-09 21:16:41', '2022-01-09 21:16:41'),
 (4, 'Handuk', '2022-01-09 21:33:10', '2022-01-09 23:59:20');
 
@@ -115,6 +115,7 @@ CREATE TABLE `merchants` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_kategori` int(11) NOT NULL,
+  `images` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -123,19 +124,20 @@ CREATE TABLE `merchants` (
 -- Dumping data for table `merchants`
 --
 
-INSERT INTO `merchants` (`id`, `name_merchant`, `price`, `quantity`, `status`, `description`, `id_kategori`, `created_at`, `updated_at`) VALUES
-(1, 'Nissin', 6500, 30, 1, 'Wafer enak', 1, NULL, '2022-01-09 00:49:42'),
-(2, 'Teh botol cap sosro', 5500, 55, 1, 'Minuman teh favorit', 2, NULL, '2022-01-09 08:41:08'),
-(3, 'Sushi', 30000, 5, 1, 'Ichiban sushi', 1, NULL, '2022-01-09 09:53:39'),
-(4, 'Milkjus', 2000, 76, 0, 'Milkshake wingsfood', 2, NULL, '2022-01-09 08:41:23'),
-(5, 'Teh javana', 4000, 28, 1, 'Teh indonesia', 2, '2022-01-07 11:36:55', '2022-01-09 00:49:44'),
-(7, 'Wafer Selamat', 12000, 41, 1, 'Wafer untuk keluarga', 1, '2022-01-07 07:18:52', '2022-01-08 23:03:07'),
-(8, 'Fanta', 4500, 45, 0, 'Minuman bersoda gaul', 2, '2022-01-07 22:20:48', '2022-01-09 09:54:08'),
-(9, 'Sunkist', 7800, 44, 0, 'Minuman jeruk', 2, '2022-01-08 20:34:40', '2022-01-09 09:54:07'),
-(10, 'FD Sandisk 16 GB', 48500, 26, 0, 'Flash disk kuat', 3, '2022-01-09 09:36:53', '2022-01-09 09:54:07'),
-(11, 'Penggaris', 7000, 21, 1, 'Ukuran 30 cm', 3, '2022-01-09 09:37:55', '2022-01-09 09:37:55'),
-(12, 'Pocari sweat', 8000, 32, 1, 'Minuman dengan ion', 2, '2022-01-09 09:39:26', '2022-01-09 09:39:38'),
-(13, 'Sunkist', 8300, 44, 0, 'Minuman jeruk', 2, '2022-01-09 21:04:29', '2022-01-09 21:18:10');
+INSERT INTO `merchants` (`id`, `name_merchant`, `price`, `quantity`, `status`, `description`, `id_kategori`, `images`, `created_at`, `updated_at`) VALUES
+(1, 'Nissin', 6500, 30, 1, 'Wafer enak', 1, 'user2.png', NULL, '2022-02-10 01:34:52'),
+(2, 'Teh botol cap sosro', 5500, 55, 0, 'Minuman teh favorit', 2, '', NULL, '2022-02-10 01:35:00'),
+(3, 'Sushi', 30000, 5, 0, 'Ichiban sushi', 1, '', NULL, '2022-01-26 00:48:38'),
+(4, 'Milkjus', 2000, 76, 0, 'Milkshake wingsfood', 2, '', NULL, '2022-02-03 00:10:49'),
+(5, 'Teh javana', 4000, 28, 1, 'Teh indonesia', 2, '', '2022-01-07 11:36:55', '2022-01-09 00:49:44'),
+(7, 'Wafer Selamat', 12000, 41, 1, 'Wafer untuk keluarga', 1, '', '2022-01-07 07:18:52', '2022-01-08 23:03:07'),
+(8, 'Fanta', 4500, 45, 0, 'Minuman bersoda gaul', 2, '', '2022-01-07 22:20:48', '2022-01-09 09:54:08'),
+(9, 'Sunkist', 7800, 44, 1, 'Minuman jeruk', 2, '', '2022-01-08 20:34:40', '2022-02-09 19:23:05'),
+(10, 'FD Sandisk 16 GB', 48500, 26, 0, 'Flash disk kuat', 3, '', '2022-01-09 09:36:53', '2022-01-09 09:54:07'),
+(11, 'Penggaris', 7000, 21, 1, 'Ukuran 30 cm', 3, '', '2022-01-09 09:37:55', '2022-01-09 09:37:55'),
+(12, 'Pocari sweat', 8000, 32, 1, 'Minuman dengan ion', 2, '', '2022-01-09 09:39:26', '2022-01-09 09:39:38'),
+(13, 'Sunkist', 8300, 44, 1, 'Minuman jeruk', 2, 'user5.jpg', '2022-01-09 21:04:29', '2022-02-09 22:01:11'),
+(21, 'Piatoz', 4500, 33, 1, 'Makanan rasa BBQ', 1, 'user5.jpg', '2022-02-09 21:36:29', '2022-02-09 21:36:29');
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2022_01_07_112308_create_merchants_table', 8),
 (10, '2022_01_07_112906_create_merchants_table', 9),
 (11, '2022_01_07_113025_create_categories_table', 10),
-(13, '2022_01_09_162048_create_categories_table', 11);
+(13, '2022_01_09_162048_create_categories_table', 11),
+(14, '2022_02_10_023019_add_images_to_merchants_table', 12);
 
 -- --------------------------------------------------------
 
@@ -288,13 +291,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `merchants`
 --
 ALTER TABLE `merchants`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`

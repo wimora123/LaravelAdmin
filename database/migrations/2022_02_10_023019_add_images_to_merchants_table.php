@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DropCategoriesTable extends Migration
+class AddImagesToMerchantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class DropCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists(table('categories'));
-        $table->increments('id');
+        Schema::table('merchants', function (Blueprint $table) {
+              $table->string('images')->after('id_kategori');
+        });
     }
 
     /**
@@ -24,6 +25,8 @@ class DropCategoriesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('merchants', function (Blueprint $table) {
+              $table->dropColumn('images');
+        });
     }
 }

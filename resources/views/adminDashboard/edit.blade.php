@@ -8,7 +8,7 @@
 			<div class="col-sm-12">
 				<h3 class="text-center">Edit Merchant</h3>
 
-				<form method="POST" action="{{ route('updateMerchant', $barang->id) }}">
+				<form method="POST" action="{{ route('updateMerchant', $barang->id) }}" enctype="multipart/form-data">
 				@csrf
 					<div class="form-group">
 					    <label>Nama Barang</label>
@@ -50,6 +50,15 @@
 							<option value="0">Not Active</option>
 					    </select>
 				    </div>
+
+				     <div class="form-group">
+						<input type="file" name="file" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}">
+						<img src="{{ asset('assets/images/'.$barang->images) }}" width="100" class="img-responsive">
+				    </div>
+
+				    @if($errors->has('description'))
+						<span class="invalid-feedback">{{ $errors->first('file') }}</span>
+					@endif
 				  
 	
 				    <div class="form-group row col-md-8 offset-md-4">

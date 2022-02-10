@@ -56,6 +56,7 @@ Route::get('/listMerchant', 'MerchantController@index')->name('listMerchant');
 Route::get('/createMerchant', 'MerchantController@create')->name('createMerchant');
 Route::post('/addMerchant', 'MerchantController@store')->name('addMerchant');
 
+
 Route::get('/editMerchant/{id}', 'MerchantController@edit')->name('editMerchant');
 Route::post('/updateMerchant/{id}', 'MerchantController@update')->name('updateMerchant');
 

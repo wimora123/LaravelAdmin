@@ -24,6 +24,7 @@
                     			<th>Harga barang</th>
 								<th>Description</th>
                     			<th>Status</th>
+                                <th>Images</th>
                     			<th colspan="2" class="text-center">Action</th>
                     		</tr>
                     	</thead>
@@ -37,9 +38,9 @@
                     			<th>{{ $brg->name_category }}</th>
                     			<td>{{ $brg->quantity}}</td>
                     			<td>{{ $brg->price }}</td>
-								<td>{{ $brg->description }}</td>
-								
+								<td>{{ $brg->description }}</td>	
 								<td><input data-idbarang="{{ $brg->id }}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Not Active" {{ $brg->status ? 'checked' : '' }}></td>
+                                <td><img src="{{ asset('assets/images/'.$brg->images) }}" width="100" class="img-responsive"></td>
                     			<td><a href="{{ route('editMerchant', $brg->id) }}" class="btn btn-success">Update</a></td>
                     			<td><form method="POST" action="{{ route('deleteMerchant', $brg->id) }}">
                     				@csrf

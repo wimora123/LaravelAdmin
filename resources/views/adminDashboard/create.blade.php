@@ -8,19 +8,19 @@
 			<div class="col-sm-12">
 				<h3 class="text-center">Create Merchant</h3>
 
-				<form method="post" action="{{ route('addMerchant') }}">
+				<form method="post" action="{{ route('addMerchant') }}" enctype="multipart/form-data">
 				@csrf
 					<div class="form-group">
 					    <label>Nama Barang</label>
 					    <input type="text" name="namaBarang" class="form-control {{ $errors->has('namaBarang') ? 'is-invalid' : '' }}" placeholder="Nama barang" value="{{ old('namaBarang') }}">
-					@if($errors->has('namaBarang'))
-                    <span class="invalid-feedback">{{ $errors->first('namaBarang') }}</span>
-                    @endif
+						@if($errors->has('namaBarang'))
+	                    <span class="invalid-feedback">{{ $errors->first('namaBarang') }}</span>
+	                    @endif
 					</div>
 
 				    <div class="form-group">
 					      <label>Kategori</label>
-					      <select name="kategori" class="form-control  {{ $errors->has('kategori') ? 'is-invalid' : '' }}">
+					      <select name="kategori" class=" {{ $errors->has('kategori') ? 'is-invalid' : '' }}">
 					      	<option value="{{ old('kategori') }}">--Pilih Kategori--</option>
 					      	@foreach($categories AS $category)
 					      	<option value="{{ $category->id }}">{{ $category->name_category }}</option>
@@ -42,17 +42,17 @@
 					<div class="form-group">
 					    <label>Quantity</label>
 					    <input type="number" name="qty" class="form-control {{ $errors->has('qty') ? 'is-invalid' : '' }}" placeholder="Quantity" value="{{ old('qty') }}">
-					@if($errors->has('qty'))
-						<span class="invalid-feedback">{{ $errors->first('qty') }}</span>
-					@endif
+						@if($errors->has('qty'))
+							<span class="invalid-feedback">{{ $errors->first('qty') }}</span>
+						@endif
 					</div>
 
 					<div class="form-group">
 					    <label>Description</label>
 					    <textarea name="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="Description">{{ old('description') }}</textarea>
-					@if($errors->has('description'))
-						<span class="invalid-feedback">{{ $errors->first('description') }}</span>
-					@endif
+						@if($errors->has('description'))
+							<span class="invalid-feedback">{{ $errors->first('description') }}</span>
+						@endif
 					</div>
 
 				    <div class="form-group">
@@ -61,6 +61,14 @@
 							<option value="0">Not Active</option>
 					    </select>
 				    </div>
+
+				    <div class="form-group">
+						<input type="file" name="file" class="form-control {{ $errors->has('file') ? 'is-invalid' : '' }}">
+				    </div>
+
+				    @if($errors->has('description'))
+						<span class="invalid-feedback">{{ $errors->first('file') }}</span>
+					@endif
 				  
 	
 				    <div class="form-group row col-md-8 offset-md-4">
