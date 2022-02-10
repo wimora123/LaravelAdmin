@@ -19,10 +19,19 @@ class LoginController extends Controller
 
     public function postLogin(Request $request)
     {
-        $this->validate($request, [
-            'username' => 'required|min:3|max:191',
-            'password' => 'required|min:3|max:191'
-        ]);
+    	$rules=[
+    		 'username' => 'required|min:3|max:191',
+             'password' => 'required|min:3|max:191'
+    	];
+
+    	$customMessage = [
+    		'username.required' => 'Username tidak boleh kosong',
+    		'username.min' => 'Username tidak boleh kurang dari 3 huruf',
+    		'password.required' => 'Password tidak boleh kosong',
+    		'password.min' => 'Password tidak boleh kurang dari 3 huruf'
+    	];
+
+        $this->validate($request, $rules, $customMessage);
 
         $username = $request->username;
         $password = $request->password;
